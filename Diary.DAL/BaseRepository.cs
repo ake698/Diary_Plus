@@ -85,7 +85,7 @@ namespace Diary.DAL
 
         public async Task<T> GetAsync(Guid id)
         {
-            return await GetAllAsync().FirstAsync(m => m.Id == id);
+            return await GetAllAsync().FirstOrDefaultAsync(m => m.Id == id);
         }
 
         #endregion

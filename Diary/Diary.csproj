@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.7">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Diary.BLL\Diary.BLL.csproj" />
+    <ProjectReference Include="..\Diary.Bussiness\Diary.Bussiness.csproj" />
+    <ProjectReference Include="..\Diary.DAL\Diary.DAL.csproj" />
+    <ProjectReference Include="..\Diary.Entity\Diary.Entity.csproj" />
+    <ProjectReference Include="..\Diary.IBLL\Diary.IBLL.csproj" />
+    <ProjectReference Include="..\Diary.IDAL\Diary.IDAL.csproj" />
+  </ItemGroup>
+
+
+</Project>

@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace Diary.Extensions
 {
+    /// <summary>
+    /// 返回统一Json过滤器
+    /// </summary>
     public class ApiResultFilterAttribute : ActionFilterAttribute
     {
         public override void OnResultExecuting(ResultExecutingContext context)

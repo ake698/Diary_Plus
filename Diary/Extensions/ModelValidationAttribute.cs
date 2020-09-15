@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace Diary.Extensions
 {
+    /// <summary>
+    /// 监听模型验证，解析错误
+    /// </summary>
     public class ModelValidationAttribute : ActionFilterAttribute
     {
         public override void OnActionExecuting(ActionExecutingContext context)

@@ -15,6 +15,7 @@ namespace Diary.Extension
         }
 
         /// <summary>
+        /// 批量依赖注入
         /// 获取项目中所有类，然后获取得到其实现接口
         /// </summary>
         /// <param name="services"></param>

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Diary.Bussiness.Dtos.Diary;
+using Diary.Bussiness.Exceptions;
 using Diary.Entity;
 using Diary.IBLL;
 using Diary.IDAL;
@@ -48,8 +49,8 @@ namespace Diary.BLL
                 .Where(x => x.Id == id)
                 .Include(x => x.Category)
                 .Include(p => p.User)
-                .FirstAsync();
-            if (result == null) throw new ArgumentNullException($"There is no Diary Entity with id = {id}");
+                .FirstOrDefaultAsync();
+            if (result == null) throw new BussinessException($"There is no Diary Entity with id = {id}");
             return _mapper.Map<DiaryDto>(result);
         }
 

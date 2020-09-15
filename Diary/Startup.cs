@@ -46,7 +46,10 @@ namespace Diary
             // 添加AutoMapper
             services.AddAutoMapperAssembly("Diary.BLL");
 
-            services.AddControllers();
+            services.AddControllers(options =>
+            {
+                options.Filters.Add(new BussinessExceptionFilter());
+            });
             services.AddMvc(options =>
             {
                 // 更改模型验证

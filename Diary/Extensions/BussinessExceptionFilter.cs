@@ -1,5 +1,5 @@
 ﻿using Diary.Bussiness.Exceptions;
-using Diary.Bussiness.ResultModel;
+using Diary.Bussiness.ResultModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;

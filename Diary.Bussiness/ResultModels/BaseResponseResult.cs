@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Text;
-
-namespace Diary.Bussiness.ResultModel
+﻿namespace Diary.Bussiness.ResultModels
 {
     public class BaseResponseResult
     {

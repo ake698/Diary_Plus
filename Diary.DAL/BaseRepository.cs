@@ -1,4 +1,5 @@
-﻿using Diary.Entity;
+﻿using Diary.Bussiness.Exceptions;
+using Diary.Entity;
 using Diary.IDAL;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -15,6 +16,14 @@ namespace Diary.DAL
         {
             _db = db;
         }
+
+        public virtual async Task<T> GetAsync(Guid id)
+        {
+            var entity = await GetAllAsync().FirstOrDefaultAsync(m => m.Id == id);
+            if(entity == null)throw new BussinessException($"There is no {typeof(T).Name} Entity with id = {id}");
+            return entity;
+        }
+
         public virtual async Task<T> CreateAsync(T model, bool saved = true)
         {
             var m = _db.Set<T>().Add(model);
@@ -97,10 +106,7 @@ namespace Diary.DAL
             return datas;
         }
 
-        public virtual async Task<T> GetAsync(Guid id)
-        {
-            return await GetAllAsync().FirstOrDefaultAsync(m => m.Id == id);
-        }
+
 
         #endregion
     }

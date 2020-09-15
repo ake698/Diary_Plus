@@ -1,7 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Diary.Entity.ModelBuilds
 {
@@ -15,6 +12,11 @@ namespace Diary.Entity.ModelBuilds
             diary.HasOne(p => p.User)
                 .WithMany()
                 .HasForeignKey(p => p.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            diary.HasOne(p => p.Category)
+                .WithMany()
+                .HasForeignKey(p => p.CategoryId)
                 .OnDelete(DeleteBehavior.NoAction);
         }
     }

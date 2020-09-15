@@ -25,5 +25,9 @@ namespace Diary.Entity
 
         [Required]
         public bool IsPublic { get; set; }
+
+        [ForeignKey(nameof(Category))]
+        public Guid CategoryId { get; set; }
+        public Category Category { get; set; }
     }
 }

@@ -14,8 +14,4 @@
     <ProjectReference Include="..\Diary.IDAL\Diary.IDAL.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Mappers\UserMapper\" />
-  </ItemGroup>
-
 </Project>

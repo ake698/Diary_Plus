@@ -18,16 +18,20 @@ namespace Diary.Controllers
 
         private readonly ILogger<WeatherForecastController> _logger;
         private readonly IUserService _userService;
-        public WeatherForecastController(ILogger<WeatherForecastController> logger, IUserService userService)
+        private readonly ICategoryService _categoryService;
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, IUserService userService, ICategoryService categoryService)
         {
             _logger = logger;
             _userService = userService;
+            _categoryService = categoryService;
         }
 
         [HttpGet]
         public IEnumerable<string> Get()
         {
+            _categoryService.GetAsync(System.Guid.NewGuid());
             return new string[] { "hello", "world" };
+            
         }
         [HttpGet("/t")]
         public IActionResult Get1()
@@ -35,7 +39,7 @@ namespace Diary.Controllers
             return Ok("fff");
         }
 
-        [HttpPost("register")]
+        [HttpPost("/register")]
         public async Task<IActionResult> Post(CreateUserDto input)
         {
             await _userService.Register(input);

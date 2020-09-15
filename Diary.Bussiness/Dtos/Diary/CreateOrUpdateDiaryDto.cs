@@ -14,6 +14,8 @@ namespace Diary.Bussiness.Dtos.Diary
 
         [Required]
         public bool IsPublic { get; set; } = true;
+
+        public Guid CategoryId { get; set; }
     }
 
 }

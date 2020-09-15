@@ -1,5 +1,6 @@
 ﻿using Diary.Entity;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,11 +8,12 @@ namespace Diary.IDAL
 {
     public interface IBaseRepository<T>  where T : BaseEntity
     {
-        Task CreateAsync(T model, bool saved = true);
-        Task UpdateAsync(T model, bool saved = true);
-        Task PatchAsync(T model, bool saved = true);
-        Task DeleteAsync(T model, bool saved = true);
-        Task DeleteAsync(Guid id, bool saved = true);
+        Task<T> CreateAsync(T model, bool saved = true);
+        Task<List<T>> CreateListAsync(List<T> models, bool saved = true);
+        Task<T> UpdateAsync(T model, bool saved = true);
+        Task<T> PatchAsync(T model, bool saved = true);
+        Task<T> DeleteAsync(T model, bool saved = true);
+        Task<T> DeleteAsync(Guid id, bool saved = true);
         Task Save();
 
         Task<T> GetAsync(Guid id);

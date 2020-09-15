@@ -1,7 +1,5 @@
-﻿using Diary.Bussiness.Dtos.User;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Diary.Bussiness.Dtos.Category;
+using Diary.Bussiness.Dtos.User;
 
 namespace Diary.Bussiness.Dtos.Diary
 {
@@ -9,7 +7,8 @@ namespace Diary.Bussiness.Dtos.Diary
     {
         public string Title { get; set; }
         public string Content { get; set; }
-        public UserDto User { get; set; }
+        public UserDto UserDto { get; set; }
+        public CategoryDto CategoryDto { get; set; }
         /// <summary>
         /// 点赞数量
         /// </summary>
@@ -21,5 +20,7 @@ namespace Diary.Bussiness.Dtos.Diary
         public int FollowCount { get; set; }
 
         public bool IsPublic { get; set; }
+
+        
     }
 }

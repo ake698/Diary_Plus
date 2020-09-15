@@ -12,8 +12,10 @@ namespace Diary.IBLL
 
         Task<List<R>> GetListAsync();
 
-        Task DeleteAsync(Guid id);
+        Task<R> DeleteAsync(Guid id);
 
-        Task<R> UpdateAsync(U u);
+        Task<R> UpdateAsync(Guid id, U input);
+
+        Task<R> CreateAsync(C input);
     }
 }

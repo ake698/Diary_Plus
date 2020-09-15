@@ -2,30 +2,41 @@
 using Diary.IDAL;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Diary.DAL
 {
-    public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity, new()
+    public abstract class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity, new()
     {
         private readonly DiaryContext _db;
         public BaseRepository(DiaryContext db)
         {
             _db = db;
         }
-        public async Task CreateAsync(T model, bool saved = true)
+        public virtual async Task<T> CreateAsync(T model, bool saved = true)
         {
-            _db.Set<T>().Add(model);
+            var m = _db.Set<T>().Add(model);
             if (saved) await Save();
+            return m.Entity;
         }
 
-        public async Task DeleteAsync(T model, bool saved = true)
+        public virtual async Task<List<T>> CreateListAsync(List<T> models, bool saved = true)
         {
-            await DeleteAsync(model.Id, saved);
+            List<T> ms = new List<T>();
+            models.ForEach(async x => { T m = await CreateAsync(x, false); ms.Add(x); });
+            if (saved) await Save();
+            return ms;
         }
 
-        public async Task DeleteAsync(Guid id, bool saved = true)
+        public virtual async Task<T> DeleteAsync(T model, bool saved = true)
+        {
+            var m = await DeleteAsync(model.Id, saved);
+            return m;
+        }
+
+        public virtual async Task<T> DeleteAsync(Guid id, bool saved = true)
         {
 
             T t = await GetAsync(id);
@@ -35,24 +46,27 @@ namespace Diary.DAL
             {
                 await Save();
             }
+            return t;
         }
 
-        public async Task PatchAsync(T model, bool saved = true)
+        public virtual async Task<T> PatchAsync(T model, bool saved = true)
         {
             _db.Entry(model).State = EntityState.Modified;
             if (saved)
             {
                 await Save();
             }
+            return model;
         }
 
-        public async Task UpdateAsync(T model, bool saved = true)
+        public virtual async Task<T> UpdateAsync(T model, bool saved = true)
         {
             _db.Entry(model).State = EntityState.Modified;
             if (saved)
             {
                 await Save();
             }
+            return model;
         }
 
         public async Task Save()
@@ -83,7 +97,7 @@ namespace Diary.DAL
             return datas;
         }
 
-        public async Task<T> GetAsync(Guid id)
+        public virtual async Task<T> GetAsync(Guid id)
         {
             return await GetAllAsync().FirstOrDefaultAsync(m => m.Id == id);
         }

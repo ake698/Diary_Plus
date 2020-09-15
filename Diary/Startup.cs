@@ -49,9 +49,12 @@ namespace Diary
             services.AddControllers();
             services.AddMvc(options =>
             {
+                // 更改模型验证
                 options.Filters.Add<ModelValidationAttribute>();
+                // 自定义API返回格式
                 options.Filters.Add<ApiResultFilterAttribute>();
             });
+            // 关闭模型自动验证
             services.Configure<ApiBehaviorOptions>(options => options.SuppressModelStateInvalidFilter = true);
 
             

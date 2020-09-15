@@ -4,14 +4,16 @@ using Diary.Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Diary.Entity.Migrations
 {
     [DbContext(typeof(DiaryContext))]
-    partial class DiaryContextModelSnapshot : ModelSnapshot
+    [Migration("20200910034841_AddDiaryToCategory")]
+    partial class AddDiaryToCategory
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

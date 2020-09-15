@@ -1,6 +1,4 @@
-﻿
-
-using Diary.Entity;
+﻿using Diary.Entity;
 
 namespace Diary.IDAL
 {

@@ -1,9 +1,6 @@
 ﻿using AutoMapper;
 using Diary.Bussiness.Dtos.Category;
 using Diary.Entity;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Diary.Bussiness.Mappers.CategoryMapper
 {
@@ -12,6 +9,7 @@ namespace Diary.Bussiness.Mappers.CategoryMapper
         public CategoryProfiles()
         {
             CreateMap<Category, CategoryDto>();
+            CreateMap<CreateOrUpdateCategoryDto, CategoryDto>();
         }
     }
 }

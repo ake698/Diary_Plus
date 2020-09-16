@@ -24,7 +24,7 @@ namespace Diary.Extensions
                 int? code = objectResult.StatusCode;
                 if(code.HasValue && code.Value != 200)
                 {
-                    context.Result = new ObjectResult(BaseResponseResult.Failed(objectResult.Value));
+                    context.Result = new ObjectResult(BaseResponseResult.Failed(objectResult.Value.ToString()));
                 }
                 else
                 {

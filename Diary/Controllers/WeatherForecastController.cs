@@ -36,7 +36,7 @@ namespace Diary.Controllers
         [HttpGet("/t")]
         public IActionResult Get1()
         {
-            return Ok("fff");
+            return BadRequest("fff");
         }
 
         [HttpPost("/register")]

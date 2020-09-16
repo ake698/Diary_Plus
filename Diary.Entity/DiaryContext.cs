@@ -1,8 +1,5 @@
 ﻿using Diary.Entity.ModelBuilds;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Diary.Entity
 {

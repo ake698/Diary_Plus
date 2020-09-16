@@ -39,11 +39,5 @@ namespace Diary.Controllers
             return BadRequest("fff");
         }
 
-        [HttpPost("/register")]
-        public async Task<IActionResult> Post(CreateUserDto input)
-        {
-            await _userService.Register(input);
-            return Ok();
-        }
     }
 }

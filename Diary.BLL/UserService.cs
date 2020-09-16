@@ -44,6 +44,9 @@ namespace Diary.BLL
 
         public async Task<UserDto> CreateAsync(CreateUserDto input)
         {
+            var users = GetUserByEmail(input.Email).ToList();
+            if (users.Count > 0) throw new BussinessException("The user already exists");
+
             var result = await _userRepository.CreateAsync(new User()
             {
                 Email = input.Email,

@@ -9,6 +9,5 @@ namespace Diary.IBLL
     {
         Task<bool> Login(string email, string password);
         Task ChangePassword(string oldPwd, string newPwd);
-
     }
 }

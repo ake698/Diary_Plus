@@ -1,9 +1,13 @@
 ﻿using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Diary.Bussiness;
 using Diary.Bussiness.Dtos;
 using Diary.IBLL;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace Diary.Controllers
 {
@@ -17,13 +21,17 @@ namespace Diary.Controllers
         };
 
         private readonly ILogger<WeatherForecastController> _logger;
-        private readonly IUserService _userService;
+        private readonly TokenOptions _tokenOptions;
         private readonly ICategoryService _categoryService;
-        public WeatherForecastController(ILogger<WeatherForecastController> logger, IUserService userService, ICategoryService categoryService)
+        private readonly ITokenService _tokenService;
+
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, IOptions<TokenOptions> options,
+            ICategoryService categoryService, ITokenService tokenService)
         {
             _logger = logger;
-            _userService = userService;
+            _tokenOptions = options.Value;
             _categoryService = categoryService;
+            _tokenService = tokenService;
         }
 
         [HttpGet]
@@ -33,10 +41,27 @@ namespace Diary.Controllers
             return new string[] { "hello", "world" };
             
         }
+
+        [Authorize]
         [HttpGet("/t")]
         public IActionResult Get1()
         {
-            return BadRequest("fff");
+            var token = _tokenService.DecodeJwt(Request.Headers["Authorization"]);
+            return Ok(token);
+        }
+
+        [HttpGet("/t2")]
+        public IActionResult Get2()
+        {
+            Claim[] claims = new Claim[]
+            {
+                new Claim("UserId", "11111"),
+                new Claim("UserName", "11111"),
+                new Claim("AvatarPath", "11111"),
+                new Claim("Email", "11111"),
+            };
+            var token = _tokenService.CreateJwt(claims);
+            return Ok(token);
         }
 
     }

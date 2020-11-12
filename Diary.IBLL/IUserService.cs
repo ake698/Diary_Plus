@@ -7,7 +7,7 @@ namespace Diary.IBLL
 {
     public interface IUserService : IBaseService<CreateUserDto, UserDto, UpdateUserDto>
     {
-        Task<bool> Login(string email, string password);
+        Task<UserDto> Login(string email, string password);
         Task ChangePassword(string oldPwd, string newPwd);
     }
 }

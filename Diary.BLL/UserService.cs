@@ -72,19 +72,16 @@ namespace Diary.BLL
             throw new NotImplementedException();
         }
 
-        public async Task<bool> Login(string email, string password)
+        public async Task<UserDto> Login(string email, string password)
         {
-            var user = GetUserByEmailAndPassword(email, password);
-            var result = await user.FirstOrDefaultAsync();
-            if(user == null)
+            var userList = GetUserByEmailAndPassword(email, password);
+            var user = await userList.FirstOrDefaultAsync();
+
+            if(user != null && user.Email.Equals(email) && user.Password.Equals(password))
             {
-                // 无账号
+                return _mapper.Map<UserDto>(user);
             }
-            else
-            {
-                // 开始登录
-            }
-            return true;
+            throw new BussinessException("Incorrect account or password ！");
         }
 
         public async Task<UserDto> UpdateAsync(Guid id, UpdateUserDto input)

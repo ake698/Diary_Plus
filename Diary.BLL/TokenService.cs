@@ -1,5 +1,6 @@
 ﻿using Diary.Bussiness;
 using Diary.Bussiness.Dtos.Token;
+using Diary.Bussiness.Dtos.User;
 using Diary.IBLL;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -20,8 +21,15 @@ namespace Diary.BLL
             _options = options.Value ?? throw new ArgumentNullException(nameof(options));
         }
 
-        public string CreateJwt(Claim[] claims)
+        public string CreateJwt(UserDto user)
         {
+            Claim[] claims = new Claim[]
+            {
+                new Claim("UserId", user.Id.ToString()),
+                new Claim("AvatarPath", user.AvatarPath),
+                new Claim("Email", user.Email),
+            };
+
             var now = DateTime.Now;
             var expires = now.AddSeconds(300);
             //signingCredentials  签名凭证
@@ -60,7 +68,7 @@ namespace Diary.BLL
             return new TokenDto
             {
                 UserId = claims.FirstOrDefault(m => m.Type == "UserId").Value,
-                UserName = claims.FirstOrDefault(m => m.Type == "UserName").Value,
+                //UserName = claims.FirstOrDefault(m => m.Type == "UserName").Value,
                 AvatarPath = claims.FirstOrDefault(m => m.Type == "AvatarPath").Value,
                 Email = claims.FirstOrDefault(m => m.Type == "Email").Value
             };

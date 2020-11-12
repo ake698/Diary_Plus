@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Diary.Bussiness;
 using Diary.Bussiness.Dtos;
+using Diary.Bussiness.Dtos.User;
 using Diary.IBLL;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -53,14 +55,12 @@ namespace Diary.Controllers
         [HttpGet("/t2")]
         public IActionResult Get2()
         {
-            Claim[] claims = new Claim[]
+            var user = new UserDto()
             {
-                new Claim("UserId", "11111"),
-                new Claim("UserName", "11111"),
-                new Claim("AvatarPath", "11111"),
-                new Claim("Email", "11111"),
+                Id = Guid.NewGuid(),
+                Email = "aaa@aaa.com",
             };
-            var token = _tokenService.CreateJwt(claims);
+            var token = _tokenService.CreateJwt(user);
             return Ok(token);
         }
 

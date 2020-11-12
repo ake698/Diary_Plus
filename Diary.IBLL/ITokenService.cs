@@ -1,11 +1,11 @@
 ﻿using Diary.Bussiness.Dtos.Token;
-using System.Security.Claims;
+using Diary.Bussiness.Dtos.User;
 
 namespace Diary.IBLL
 {
     public interface ITokenService
     {
         TokenDto DecodeJwt(string token);
-        string CreateJwt(Claim[] claims);
+        string CreateJwt(UserDto user);
     }
 }
